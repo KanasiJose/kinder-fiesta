@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card p-3 shadow-sm rounded-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0 text-primary fw-bold">🛠️ Panel de Administración</h3>
+    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Volver al inicio</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Ubicación</th>
+          <th>Contacto</th>
+          <th>Estado</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for salon in salones %}
+        <tr>
+          <td style="width:100px;">
+            {% if salon.imagen %}
+              <img src="{{ url_for('static', filename='uploads/' + salon.imagen) }}" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+            {% else %}
+              <div class="placeholder-sm">Sin imagen</div>
+            {% endif %}
+          </td>
+          <td class="fw-semibold">{{ salon.nombre }}</td>
+          <td>
+            {% if salon.ubicacion %}
+              <a href="https://www.google.com/maps/search/{{ salon.ubicacion | urlencode }}" target="_blank" class="link-map">📍 Ver mapa</a>
+            {% else %}
+              <span class="text-muted">Sin ubicación</span>
+            {% endif %}
+          </td>
+          <td>{{ salon.contacto }}</td>
+          <td>
+            {% if salon.aprobado %}
+              <span class="badge bg-success">Aprobado</span>
+            {% else %}
+              <span class="badge bg-warning text-dark">Pendiente</span>
+            {% endif %}
+          </td>
+          <td class="text-center">
+            {% if not salon.aprobado %}
+              <a href="{{ url_for('aprobar_salon', salon_id=salon.id) }}" class="btn btn-success btn-sm mb-1">✅</a>
+            {% endif %}
+            <form action="{{ url_for('eliminar_salon', salon_id=salon.id) }}" method="post" style="display:inline;">
+              <button class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este salón?')">🗑️</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

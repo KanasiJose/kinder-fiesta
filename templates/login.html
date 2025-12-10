@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Admin - Kinder Fiesta</title>
+</head>
+<body>
+    <h1>Login Administrador</h1>
+    <form method="POST">
+        Usuario: <input type="text" name="usuario" required><br><br>
+        Contraseña: <input type="password" name="contrasena" required><br><br>
+        <button type="submit">Ingresar</button>
+    </form>
+    <br>
+    <a href="{{ url_for('index') }}">⬅ Volver</a>
+</body>
+</html>

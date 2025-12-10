@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="card p-4 shadow-sm rounded-4 text-center">
+      <div class="admin-emoji">🔐</div>
+      <h4 class="fw-bold mb-3">Panel de Administrador</h4>
+      <p class="text-muted mb-3">Ingresa la contraseña para administrar salones</p>
+
+      <form method="POST">
+        <div class="mb-3">
+          <input type="password" class="form-control form-control-lg" name="password" placeholder="Contraseña" required>
+        </div>
+        <button class="btn btn-primary w-100 py-2">Ingresar</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
